@@ -59,11 +59,6 @@ int LCS(string a, string b) {
 			d[i][0] = 0;
 		}
 	}
-	/*
-	for (int i = 0; i<a_len; i++) {
-		cout << d[i][0] << endl;
-	}
-	*/
 
 	// 迭代
 	for (int i = 1; i<a_len; i++) {
@@ -77,6 +72,7 @@ int LCS(string a, string b) {
 		}
 	}
 
+	// 打印表格
 	int res = 0;
 	cout << "表格如下： " << endl;
 	for (int i = 0; i<a_len; i++) {
@@ -88,7 +84,6 @@ int LCS(string a, string b) {
 	}
 
 	// 释放空间
-
 	for (int i = 0; i < a_len; i++) {
 		delete[] d[i];
 	}
