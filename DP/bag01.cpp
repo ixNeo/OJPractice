@@ -67,6 +67,7 @@ int bagSolve(int* weight, int* values, int num){
 		cout << endl;
 	}
 
+	// 释放空间
  	for(int i=0;i<=num;i++){
  		delete[] d[i];
  	}
