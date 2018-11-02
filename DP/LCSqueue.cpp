@@ -17,8 +17,7 @@ int LCS(string a, string b);
 int main() {
 	string a, b;
 	cout << "输入两个字符串：（enter键结束）" << endl;
-/*	cin >> a >> b;*/
-	a = "all"; b = "aslle";
+	cin >> a >> b;
 	int res = LCS(a, b);
 	cout << "最长公共子序列的长度为： " << res << endl;
 	return 0;
