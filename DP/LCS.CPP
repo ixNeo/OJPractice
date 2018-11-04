@@ -27,10 +27,15 @@ int main() {
 	cout << "输入两个字符串：（enter键结束）" << endl;
 	cin >> a >> b;
 	int res = LCS(a, b);
-	cout << "最长公共子串的长度为： " << res << endl;
+	cout << "******************\n最长公共子串的长度为： " << res << endl;
 	return 0;
 }
 
+/*
+ * input: string a, string b;
+ * return: 最长公共子串的长度
+ * 内部输出最长公共子串
+*/
 int LCS(string a, string b) {
 
 	int a_len = a.length(), b_len = b.length();
@@ -74,15 +79,28 @@ int LCS(string a, string b) {
 
 	// 打印表格
 	int res = 0;
-	cout << "表格如下： " << endl;
+	int row=0, col=0;
+	cout << "******************\n表格如下： " << endl;
 	for (int i = 0; i<a_len; i++) {
 		for (int j = 0; j<b_len; j++) {
-			res = max(res, d[i][j]);
+			if(res<d[i][j]){
+				res = d[i][j];
+				row = i; col = j;
+			}
 			cout << d[i][j] << '\t';
 		}
 		cout << endl;
 	}
 
+	// 打印最长公共字符串
+	int i=row, j=col;
+	string lcs;
+	while(i>=0 && j>=0 && d[i][j]>0){
+		lcs += a[i];
+		i--;j--;
+	}
+	reverse(lcs.begin(),lcs.end());
+	cout << "******************\n最长公共字符串为：" << lcs << endl;
 	// 释放空间
 	for (int i = 0; i < a_len; i++) {
 		delete[] d[i];
