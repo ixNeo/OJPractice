@@ -24,6 +24,7 @@ int LCS(string a, string b);
 
 int main() {
 	string a, b;
+	cout << "最长公共子串： \n*********************" << endl;
 	cout << "输入两个字符串：（enter键结束）" << endl;
 	cin >> a >> b;
 	int res = LCS(a, b);
@@ -101,6 +102,7 @@ int LCS(string a, string b) {
 	}
 	reverse(lcs.begin(),lcs.end());
 	cout << "******************\n最长公共字符串为：" << lcs << endl;
+
 	// 释放空间
 	for (int i = 0; i < a_len; i++) {
 		delete[] d[i];
