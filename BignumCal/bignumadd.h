@@ -41,7 +41,7 @@ string bigNumAdd(string num1,string num2){
 
     // return
     reverse(sumnum.begin(),sumnum.end());
-    cout <<  sumnum << endl;
+//    cout <<  sumnum << endl;
     return sumnum;
 }
 #endif // BIGNUMADD_H

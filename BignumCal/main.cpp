@@ -3,60 +3,59 @@
 #include<string>
 #include<iterator>
 #include<algorithm>
-#include "bignumadd.h"
+//#include "bignumadd.h"
+//#include "bignummul.h"
+//#include "bignumsub.h"
 using namespace std;
 
-string mulOnepos(string bignum, char smallOne){
-    string res;
-    int curNum=0, lowNum=0, highNum=0;
-
-//    reverse(bignum.begin(),bignum.end());
-
-    for(int i=0;i<bignum.size();i++){
-        curNum = highNum + (bignum[i]-'0')*(smallOne-'0');
-        lowNum = curNum % 10;
-        if(curNum>=10){
-            highNum = curNum / 10;
-        }else{
-            highNum = 0;
-        }
-        res.append(1,lowNum+'0');
-    }
-    if(highNum!=0){
-        res.append(1,highNum+'0');
-    }
-//    reverse(res.begin(),res.end());
-    return res;
+char cmpStr(string num1,string num2){
+    char sign = '+';
+    // 1.size; 2. equation
+   if(num1.size()>num2.size()){
+       sign = '+';
+   }else if(num1.size()<num2.size()){
+       sign = '-';
+   }else{
+       for(int i=0;i<num1.size();i++){
+           if(num1[i]>num2[i]){
+               sign = '+';  break;
+           }else if(num1[i]<num2[i]){
+               sign = '-';  break;
+           }else{}
+       }
+   }
+   return sign;
 }
+// big num sub
+string bigNumDiv(string num1,string num2){
+    // get-relative-size
+    char sign = cmpStr(num1,num2);
+    if(sign=='+'){}
 
-// big num multiply
-string bigNumMul(string num1,string num2){
     // reverse
     reverse(num1.begin(),num1.end());
     reverse(num2.begin(),num2.end());
 
     // standard-process data
     string bignum,smallnum,sumnum;
-    if(num1.size()>num2.size()){
+    if(sign=='+'){
         bignum = num1; smallnum = num2;
     }else{
         bignum = num2; smallnum = num1;
     }
     sumnum = bignum;
 
-    // multiply
+    // sub
     for(int i=0;i<smallnum.size();i++){
-        string tmp;
-        tmp = mulOnepos(bignum, smallnum[i]);
-        int lowposVal = smallnum[i]-'0'+sumnum[i]-'0';
+        int lowposVal = sumnum[i]-smallnum[i];
         int lowpos = i;
         sumnum[lowpos] = lowposVal+'0';
-        while(lowposVal>9){
-            sumnum[lowpos] = lowposVal+'0'-10;
-            if(lowpos+1>=sumnum.size()){
-                sumnum.append(1,'0');
-            }
-            sumnum[lowpos+1] += 1;
+        while(lowposVal<0){
+            sumnum[lowpos] = 10+lowposVal+'0';
+//            if(lowpos+1>=sumnum.size()){
+//                sumnum.append(1,'0');
+//            }
+            sumnum[lowpos+1] -= 1;
             lowposVal = sumnum[lowpos+1]-'0';
             lowpos += 1;
         }
@@ -65,14 +64,14 @@ string bigNumMul(string num1,string num2){
 
     // return
     reverse(sumnum.begin(),sumnum.end());
-    cout <<  sumnum << endl;
+    cout <<  sign << sumnum << endl;
     return sumnum;
 }
 
 int main(){
     string num1,num2,sumnum;
     cin >> num1 >> num2;
-    sumnum = bigNumMul(num1,num2);
-//    cout << mulOnepos(num1,'8') << endl;
+    sumnum = bigNumDiv(num1,num2);
+//    cout << mulOnepos(num1,num2[0]) << endl;
     return 0;
 }

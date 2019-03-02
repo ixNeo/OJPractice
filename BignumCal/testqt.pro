@@ -8,4 +8,5 @@ SOURCES += \
 
 HEADERS += \
     bignumadd.h \
-    bignumsub.h
+    bignumsub.h \
+    bignummul.h
